@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.Owin.Security.OAuth</id>
+    <version>3.0.0-alpha2-30325-847-dev</version>
+    <title>Microsoft.Owin.Security.OAuth  (nightly 2014 Mar 25)</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/aspnetcomponent_rtw_enu.htm</licenseUrl>
+    <projectUrl>http://katanaproject.codeplex.com/</projectUrl>
+    <iconUrl>/Content/images/packageDefaultIcon.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Middleware that enables an application to support any standard OAuth 2.0 authentication workflow.</description>
+    <summary>Middleware that enables an application to support any standard OAuth 2.0 authentication workflow.</summary>
+    <tags>Microsoft OWIN Katana</tags>
+    <dependencies>
+      <dependency id="Owin" version="1.0" />
+      <dependency id="Microsoft.Owin" version="3.0.0-alpha2-30325-847-dev" />
+      <dependency id="Newtonsoft.Json" version="4.5.11" />
+      <dependency id="Microsoft.Owin.Security" version="3.0.0-alpha2-30325-847-dev" />
+    </dependencies>
+  </metadata>
+</package>
