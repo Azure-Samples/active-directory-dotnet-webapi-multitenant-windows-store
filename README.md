@@ -13,7 +13,7 @@ For more information about how the protocols work in this scenario and other sce
 
 To run this sample you will need:
 - Visual Studio 2013
-- Windows 8 or higher
+- Windows 8.1 or higher
 - An Internet connection
 - An Azure subscription (a free trial is sufficient)
 - A Microsoft account

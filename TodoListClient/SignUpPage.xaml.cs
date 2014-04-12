@@ -1,4 +1,19 @@
-﻿using TodoListClient.Common;
+﻿//----------------------------------------------------------------------------------------------
+//    Copyright 2014 Microsoft Corporation
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+//----------------------------------------------------------------------------------------------
+using TodoListClient.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -122,9 +137,9 @@ namespace TodoListClient
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ar.AccessToken);           
             // test data. Ina  real app, the data would be something that proves that the user has gone throuhg whatever onboarding steps are required
-            HttpContent content = new StringContent((@"{ ""name"": """ + txtOrgName.Text + @"""}"));
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var response = await httpClient.PostAsync(App.APIHostname+App.APIOnboardPath, content);
+            //HttpContent content = new StringContent((@"{ ""name"": """ + txtOrgName.Text + @"""}"));
+            //content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = await httpClient.PostAsJsonAsync(App.APIHostname + App.APIOnboardPath,txtOrgName.Text + @"""}");
 
             if (response.IsSuccessStatusCode)
             {   // successfully onboarded.

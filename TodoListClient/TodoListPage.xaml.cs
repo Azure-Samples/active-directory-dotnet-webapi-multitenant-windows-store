@@ -1,4 +1,19 @@
-﻿using TodoListClient.Common;
+﻿//----------------------------------------------------------------------------------------------
+//    Copyright 2014 Microsoft Corporation
+//
+//    Licensed under the Apache License, Version 2.0 (the "License");
+//    you may not use this file except in compliance with the License.
+//    You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//    Unless required by applicable law or agreed to in writing, software
+//    distributed under the License is distributed on an "AS IS" BASIS,
+//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//    See the License for the specific language governing permissions and
+//    limitations under the License.
+//----------------------------------------------------------------------------------------------
+using TodoListClient.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -93,6 +108,7 @@ namespace TodoListClient
                 txtFirstName.Text = result.UserInfo.UserId;
                 txtLastName.Text = "(Temporary identifier)";
             }
+            btnAccount.Visibility = Windows.UI.Xaml.Visibility.Visible;
             // Call the web API presenting the access token
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
@@ -163,6 +179,7 @@ namespace TodoListClient
                 txtFirstName.Text = result.UserInfo.UserId;
                 txtLastName.Text = "(Temporary identifier)";
             }
+            btnAccount.Visibility = Windows.UI.Xaml.Visibility.Visible;
             // Call the web API presenting the access token
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
@@ -252,6 +269,8 @@ namespace TodoListClient
             {
                 // delete the current token
                 App.AuthenticationContext.TokenCacheStore.Clear();
+                // hide the account icon
+                btnAccount.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                 // re-bind AuthenticationContext to the common, tenant-less endpoint
                 App.AuthenticationContext = new AuthenticationContext(App.CommonAuthority);
                 // navigate back to the welcome page

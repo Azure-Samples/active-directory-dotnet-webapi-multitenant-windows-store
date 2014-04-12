@@ -37,7 +37,7 @@
                     />
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
-            <Button Name="btnAccount" Click="btnAccount_Click" Grid.Column="2" HorizontalAlignment="Right" Margin="30" BorderThickness="0">
+            <Button x:Name="btnAccount" Visibility="Collapsed" Click="btnAccount_Click" Grid.Column="2" HorizontalAlignment="Right" Margin="30" BorderThickness="0">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
                         <TextBlock x:Name="txtFirstName" FontSize="20" HorizontalAlignment="Right" Margin="5">FirstName</TextBlock>
