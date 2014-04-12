@@ -2,10 +2,12 @@ NativeClient-WebAPI-MultiTenant-WindowsStore
 =========================
 
 
-================TO BE EDITED====================
 
 
-This sample demonstrates a Windows Store application calling a web API that is secured using Azure AD.  The Windows Store application uses the Active Directory Authentication Library (ADAL) to obtain a JWT access token through the OAuth 2.0 protocol.  The access token is sent to the web API to authenticate the user.
+
+This sample demonstrates a Windows Store application calling a multi-tenant web API that is secured using Azure AD.  The Windows Store application uses the Active Directory Authentication Library (ADAL) to obtain a JWT access token through the OAuth 2.0 protocol.  The access token is sent to the web API to authenticate the user.
+The web API project demonstrates how to structure your services for being accessed by users coming from multiple Azure AD tenants.
+The Windows Store application shows how to handle in-up sign up for a new service and sign in from any Windows Azure tenant.     
 
 For more information about how the protocols work in this scenario and other scenarios, see [Authentication Scenarios for Azure AD](http://go.microsoft.com/fwlink/?LinkId=394414).
 
@@ -24,7 +26,7 @@ Every Azure subscription has an associated Azure Active Directory tenant.  If yo
 
 From your shell or command line:
 
-`git clone git@github.com:AzureADSamples/NativeClient-WindowsStore.git`
+`git clone git@github.com:AzureADSamples/NativeClient-WebAPI-MultiTenant-WindowsStore.git`
 
 ### Step 2:  Create a user account in your Azure Active Directory tenant
 

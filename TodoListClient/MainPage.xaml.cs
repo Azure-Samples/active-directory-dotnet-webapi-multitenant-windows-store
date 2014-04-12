@@ -42,24 +42,11 @@ namespace TodoListClient
         public MainPage()
         {
             this.InitializeComponent();
-            // Initialize the AuthenticationContext for the application.
-            // If the app already has a cached token, the associated authority is used in lieu of the common endpoint;
-            // this will make it possible for ADAL to leverage the token cache when requesting tokens for a specific tenant.
-            //App.AuthenticationContext = new AuthenticationContext(App.CommonAuthority);
-            //if (App.AuthenticationContext.TokenCacheStore.Count > 0)
-            //{
-            //    string cachedAuthority = App.AuthenticationContext.TokenCacheStore.First().Key.Authority;
-            //    App.AuthenticationContext = new AuthenticationContext(cachedAuthority);
-            //}
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-           // if (ApplicationData.Current.LocalSettings.Values["Tenant"] != null)
-           //if (App.AuthenticationContext.TokenCacheStore.Count>0)
-           // {
-           //     this.Frame.Navigate(typeof(TodoListPage));
-           // }
+
         }
 
         private void btnSignUp_Click(object sender, RoutedEventArgs e)
