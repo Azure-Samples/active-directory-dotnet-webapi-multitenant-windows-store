@@ -36,7 +36,7 @@ If you already have a user account in your Azure Active Directory tenant, you ca
 
 There are two projects in this sample.  Each needs to be separately registered in your Azure AD tenant.
 
-#### Register the TodoListService web API
+#### Register the TodoListServiceMT web API
 
 1. Sign in to the [Azure management portal](https://manage.windowsazure.com).
 2. Click on Active Directory in the left hand nav.
@@ -44,14 +44,15 @@ There are two projects in this sample.  Each needs to be separately registered i
 4. Click the Applications tab.
 5. In the drawer, click Add.
 6. Click "Add an application my organization is developing".
-7. Enter a friendly name for the application, for example "TodoListService", select "Web Application and/or Web API", and click next.
+7. Enter a friendly name for the application, for example "TodoListServiceMT", select "Web Application and/or Web API", and click next.
 8. For the sign-on URL, enter the base URL for the sample, which is by default `https://localhost:44321`.
-9. For the App ID URI, enter `https://<your_tenant_name>/TodoListService`, replacing `<your_tenant_name>` with the name of your Azure AD tenant.  Click OK to complete the registration.
+9. For the App ID URI, enter `https://<your_tenant_name>/TodoListServiceMT`, replacing `<your_tenant_name>` with the name of your Azure AD tenant.  Click OK to complete the registration.
 10. While still in the Azure portal, click the Configure tab of your application.
 11. Find the Client ID value and copy it aside, you will need this later when configuring your application.
+12. Find "the application is multi-tenant" switch and flip it to yes. Hit the Save button from the command bar.
 12. Using the Manage Manifest button in the drawer, download the manifest file for the application.
 13. Add a permission to the application by replacing the appPermissions section with the block of JSON below.  You will need to create a new GUID and replace the example permissionId GUID.
-14. Using the Manage Manfiest button, upload the updated manifest file.  Save the configuration of the app.
+14. Using the Manage Manifest button, upload the updated manifest file.  Save the configuration of the app.
 
 ```JSON
 "appPermissions": [
@@ -81,11 +82,11 @@ There are two projects in this sample.  Each needs to be separately registered i
 Before you can register the TodoListClient application in the Azure portal, you need to find out the application's redirect URI.  Windows 8 provides each application with a unique URI and ensures that messages sent to that URI are only sent to that application.  To determine the redirect URI for your project:
 
 1. Open the solution in Visual Studio 2013.
-2. In the TodoListClient project, open the `MainPage.xaml.cs` file.
+2. In the TodoListClient project, open the `App.xaml.cs` file.
 3. Find this line of code and set a breakpoint on it.
 
 ```C#
-Uri redirectURI = Windows.Security.Authentication.Web.WebAuthenticationBroker.GetCurrentApplicationCallbackUri();
+public static Uri ReturnUri = WebAuthenticationBroker.GetCurrentApplicationCallbackUri();
 ```
 
 4. Right-click on the TodoListClient project and Debug --> Start New Instance.
@@ -114,24 +115,23 @@ ms-app://s-1-15-2-2123189467-1366327299-2057240504-936110431-2588729968-14545362
 
 ### Step 4:  Configure the sample to use your Azure AD tenant
 
-#### Configure the TodoListService project
+#### Configure the TodoListServiceMT project
 
 1. Open the solution in Visual Studio 2013.
 2. Open the `web.config` file.
 3. Find the app key `ida:Tenant` and replace the value with your AAD tenant name.
-4. Find the app key `ida:Audience` and replace the value with the App ID URI you registered earlier, for example `https://<your_tenant_name>/TodoListService`.
-5. Find the app key `ida:ClientId` and replace the value with the Client ID for the TodoListService from the Azure portal.
+4. Find the app key `ida:Audience` and replace the value with the App ID URI you registered earlier, for example `https://<your_tenant_name>/TodoListServiceMT`.
+
 
 #### Configure the TodoListClient project
 
-1. Open `MainPage.xaml.cs'.
-2. Find the declaration of `tenant` and replace the value with the name of your Azure AD tenant.
+1. Open `App.xaml.cs'.
 3. Find the declaration of `clientId` and replace the value with the Client ID from the Azure portal.
-4. Find the declaration of `todoListResourceId` and `todoListBaseAddress` and ensure their values are set properly for your TodoListService project.
+4. Find the declaration of `ResourceID` and `APIHostname` and ensure their values are set properly for your TodoListService project.
 
 ### Step 5:  Trust the IIS Express SSL certificate
 
-Since the web API is SSL protected, the client of the API (the web app) will refuse the SSL connection to the web API unless it trusts the API's SSL certificate.  Use the following steps in Windows Powershell to trust the IIS Express SSL certificate.  You only need to do this once.  If you fail to do this step, calls to the TodoListService will always throw an unhandled exception where the inner exception message is:
+Since the web API is SSL protected, the client of the API (the web app) will refuse the SSL connection to the web API unless it trusts the API's SSL certificate.  Use the following steps in Windows Powershell to trust the IIS Express SSL certificate.  You only need to do this once.  If you fail to do this step, calls to the TodoListServiceMT will always throw an unhandled exception where the inner exception message is:
 
 "The underlying connection was closed: Could not establish trust relationship for the SSL/TLS secure channel."
 
@@ -165,11 +165,32 @@ You can verify the certificate is in the Trusted Root store by running this comm
 
 `PS C:\windows\system32> dir Cert:\LocalMachine\Root`
 
-### Step 6:  Run the sample
+
+### Step 6:  [optional] Create an Azure Active Directory test tenant
+
+This sample shows how to take advantage of the consent model in Azure AD to make a web API available to native clients ran by any user from any organization with a tenant in Azure AD. To see that part of the sample in action, you need to have access to user accounts from a tenant that is different from the one you used for developing the application. The simplest way of doing that is to create a new directory tenant in your Azure subscription (just navigate to the main Active Directory page in the portal and click Add) and add test users. This step is optional as you can also run the sample with accounts from the same directory, but if you do you will not see the consent prompts as the app is already approved. 
+
+### Step 7:  Run the sample
 
 Clean the solution, rebuild the solution, and run it.  You might want to go into the solution properties and set both projects as startup projects, with the service project starting first.
 
-Explore the sample by signing in, adding items to the To Do list, removing the user account, and starting again.  Notice that if you stop the application without removing the user account, the next time you run the application you won't be prompted to sign-in again - that is because ADAL has a persistent cache, and remembers the tokens from the previous run.
+The sample application implements two tasks: signing up as a new user and signing in to access the Todo service. To be able to sing in, you must fisrt sign up with the account you want to use. 
+
+#### Sign up
+
+In the native app UI, choose Sign Up. In the sign up screen, enter some random text in the organization name and hit the Sign Up button. You will be prompted to enter your credentials.
+
+
+- If you enter the credentials of a user from a tenant that is different from the one in which you configured the web API and the native app, you will be presentd with a consent dialog. Click OK.
+- If you enter the credentials of a user from the same tenant, you will not see a consent dialog.
+
+Upon successful authentication, you will be presented with a message that confirms that the sign up task took place. After having dismissed the message, you will be redirected to the Todo management screen. Create some todo items, then stop the debugging session.
+ 
+
+#### Sign in
+
+Launch again a debugging session for the solution. You will see that you are transported directly to the Todo management screen: that is because ADAL cached the token obtained in the former step. Click on the top-right account icon to clear the cache and the session.
+You will be transported back to the welcome page. This time choose Sign In, then enter the same credentials you used for the sign up: you will get back to the Todo management screen. 
 
 ## How To Deploy This Sample to Azure
 
@@ -181,22 +202,5 @@ Coming soon.
 
 ## How To Recreate This Sample
 
-First, in Visual Studio 2013 create an empty solution to host the  projects.  Then, follow these steps to create each project.
+Coming soon.
 
-### Creating the TodoListService Project
-
-1. In the solution, create a new ASP.Net MVC web API project called TodoListService and while creating the project, click the Change Authentication button, select Organizational Accounts, Cloud - Single Organization, enter the name of your Azure AD tenant, and set the Access Level to Single Sign On.  You will be prompted to sign-in to your Azure AD tenant.  NOTE:  You must sign-in with a user that is in the tenant; you cannot, during this step, sign-in with a Microsoft account.
-2. In the `Models` folder add a new class called `TodoItem.cs`.  Copy the implementation of TodoItem from this sample into the class.
-3. Add a new, empty, Web API 2 controller called `TodoListController`.
-4. Copy the implementation of the TodoListController from this sample into the controller.  Don't forget to add the `[Authorize]` attribute to the class.
-5. In `TodoListController` resolving missing references by adding `using` statements for `System.Collections.Concurrent`, `TodoListService.Models`, `System.Security.Claims`.
-
-### Creating the TodoListClient Project
-
-1. In the solution, create a new project for a Windows Store --> Blank App (XAML) called TodoListClient.
-2. Add the pre-release Active Directory Authentication Library (ADAL) NuGet, Microsoft.IdentityModel.Clients.ActiveDirectory, version 2.6.0-alpha (or higher), to the project.
-3. Open `Package.appxmanifest`, click the Capabilities tab, and enable the following four capabilities: Enterprise Authentication, Internet (Client), Private Networks (Client & Server), Shared User Certificates
-4. Copy the markup from `MainPage.xaml` in the sample project to `MainPage.xaml` in the new project.
-5. Copy the code from `MainPage.xaml.cs` in the sample project to `MainPage.xaml.cs` in the new project.
-
-Finally, in the properties of the solution itself, set both projects as startup projects.
