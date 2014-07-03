@@ -205,7 +205,7 @@ You will be transported back to the welcome page. This time choose Sign In, then
 
 ## How To Deploy This Sample to Azure
 
-Coming soon.
+Coming soon .
 
 ## About The Code
 
