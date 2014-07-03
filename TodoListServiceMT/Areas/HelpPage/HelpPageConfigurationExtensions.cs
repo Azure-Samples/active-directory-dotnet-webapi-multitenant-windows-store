@@ -1,21 +1,7 @@
-//----------------------------------------------------------------------------------------------
-//    Copyright 2014 Microsoft Corporation
-//
-//    Licensed under the Apache License, Version 2.0 (the "License");
-//    you may not use this file except in compliance with the License.
-//    You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//    Unless required by applicable law or agreed to in writing, software
-//    distributed under the License is distributed on an "AS IS" BASIS,
-//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//    See the License for the specific language governing permissions and
-//    limitations under the License.
-//----------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -283,7 +269,28 @@ namespace TodoListServiceMT.Areas.HelpPage
                         complexTypeDescription = typeDescription as ComplexTypeModelDescription;
                     }
 
-                    if (complexTypeDescription != null)
+                    // Example:
+                    // [TypeConverter(typeof(PointConverter))]
+                    // public class Point
+                    // {
+                    //     public Point(int x, int y)
+                    //     {
+                    //         X = x;
+                    //         Y = y;
+                    //     }
+                    //     public int X { get; set; }
+                    //     public int Y { get; set; }
+                    // }
+                    // Class Point is bindable with a TypeConverter, so Point will be added to UriParameters collection.
+                    // 
+                    // public class Point
+                    // {
+                    //     public int X { get; set; }
+                    //     public int Y { get; set; }
+                    // }
+                    // Regular complex class Point will have properties X and Y added to UriParameters collection.
+                    if (complexTypeDescription != null
+                        && !IsBindableWithTypeConverter(parameterType))
                     {
                         foreach (ParameterDescription uriParameter in complexTypeDescription.Properties)
                         {
@@ -318,6 +325,16 @@ namespace TodoListServiceMT.Areas.HelpPage
                     }
                 }
             }
+        }
+
+        private static bool IsBindableWithTypeConverter(Type parameterType)
+        {
+            if (parameterType == null)
+            {
+                return false;
+            }
+
+            return TypeDescriptor.GetConverter(parameterType).CanConvertFrom(typeof(string));
         }
 
         private static ParameterDescription AddParameterDescription(HelpPageApiModel apiModel,

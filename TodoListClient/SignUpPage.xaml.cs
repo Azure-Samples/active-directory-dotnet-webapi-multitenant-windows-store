@@ -131,6 +131,8 @@ namespace TodoListClient
         {
                    
             // get a token for the web API and in so doing present the user with the consent experience
+            Uri tempUri = new Uri("https://hwatevah");
+           // AuthenticationResult ar = await App.AuthenticationContext.AcquireTokenAsync(App.ResourceID,App.ClientID,tempUri);
             AuthenticationResult ar = await App.AuthenticationContext.AcquireTokenAsync(App.ResourceID,App.ClientID,App.ReturnUri);
             
             // call the onboarding API with the new token
@@ -143,9 +145,9 @@ namespace TodoListClient
 
             if (response.IsSuccessStatusCode)
             {   // successfully onboarded.
-                MessageDialog dialog = new MessageDialog(string.Format("Congratulations, you successfully signed up as {0}.\n\n If you want to sign in as a different user, simply click on the user control on the top right corner of the Todo screen", ar.UserInfo.UserId));
+                MessageDialog dialog = new MessageDialog(string.Format("Congratulations, you successfully signed up as {0}.\n\n If you want to sign in as a different user, simply click on the user control on the top right corner of the Todo screen", ar.UserInfo.DisplayableId));
                 await dialog.ShowAsync();
-                string cachedAuthority = App.AuthenticationContext.TokenCacheStore.First().Key.Authority;
+                string cachedAuthority = App.AuthenticationContext.TokenCache.ReadItems().First().Authority;
                 App.AuthenticationContext = new AuthenticationContext(cachedAuthority);
                 // redirect the user to the actual app page
                 this.Frame.Navigate(typeof(TodoListPage));
@@ -153,9 +155,9 @@ namespace TodoListClient
             else 
             {
                 // failure. Notify the user, clean up the token cache and remain on this page
-                MessageDialog dialog = new MessageDialog(string.Format("Something went wrong. Apparently the user {0} didn't work out. Try again", ar.UserInfo.UserId));
+                MessageDialog dialog = new MessageDialog(string.Format("Something went wrong. Apparently the user {0} didn't work out. Try again", ar.UserInfo.DisplayableId));
                 await dialog.ShowAsync();
-                App.AuthenticationContext.TokenCacheStore.Clear();
+                App.AuthenticationContext.TokenCache.Clear();
             }
         }
     }

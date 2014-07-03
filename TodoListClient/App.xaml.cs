@@ -100,12 +100,12 @@ namespace TodoListClient
                 // Initialize the AuthenticationContext with the common (tenantless) endpoint
                 App.AuthenticationContext = new AuthenticationContext(App.CommonAuthority);
                 // if we aready have tokens in the cache
-                if (App.AuthenticationContext.TokenCacheStore.Count > 0)
+                if (App.AuthenticationContext.TokenCache.ReadItems().Count() > 0)
                 {
                     // re-bind the AuthenticationContext to the authority that sourced the token in the cache
                     // this is needed for the cache to work when asking a token from that authority
                     // (the common endpoint never triggers cache hits)
-                    string cachedAuthority = App.AuthenticationContext.TokenCacheStore.First().Key.Authority;
+                    string cachedAuthority = App.AuthenticationContext.TokenCache.ReadItems().First().Authority;
                     App.AuthenticationContext = new AuthenticationContext(cachedAuthority);
                     // navigate directly to the main app page
                     rootFrame.Navigate(typeof(TodoListPage), e.Arguments);

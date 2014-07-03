@@ -81,7 +81,7 @@ namespace TodoListClient
             // get a token for the API. Note that this will often come from the cache
             AuthenticationResult result = await App.AuthenticationContext.AcquireTokenAsync(App.ResourceID, App.ClientID);
 
-            if (result.Status != AuthenticationStatus.Succeeded)
+            if (result.Status != AuthenticationStatus.Success)
             {
                 if (result.Error == "authentication_canceled")
                 {
@@ -105,7 +105,7 @@ namespace TodoListClient
             }
             else
             {
-                txtFirstName.Text = result.UserInfo.UserId;
+                txtFirstName.Text = result.UserInfo.UniqueId;
                 txtLastName.Text = "(Temporary identifier)";
             }
             btnAccount.Visibility = Windows.UI.Xaml.Visibility.Visible;
@@ -134,7 +134,7 @@ namespace TodoListClient
                     // If the To Do list service returns access denied, clear the token cache and have the user sign-in again.
                     MessageDialog dialog = new MessageDialog("Sorry, you don't have access to the To Do Service.  You might need to sign up.");
                     await dialog.ShowAsync();
-                    App.AuthenticationContext.TokenCacheStore.Clear();
+                    App.AuthenticationContext.TokenCache.Clear();
                     this.Frame.Navigate(typeof(MainPage));
                 }
                 else
@@ -152,7 +152,7 @@ namespace TodoListClient
             // given that a POST will always follow a get of all the todos, whihc will have already acquired the token if necessary
             AuthenticationResult result = await App.AuthenticationContext.AcquireTokenAsync(App.ResourceID, App.ClientID);
 
-            if (result.Status != AuthenticationStatus.Succeeded)
+            if (result.Status != AuthenticationStatus.Success)
             {
                 if (result.Error == "authentication_canceled")
                 {
@@ -176,7 +176,7 @@ namespace TodoListClient
             }
             else
             {
-                txtFirstName.Text = result.UserInfo.UserId;
+                txtFirstName.Text = result.UserInfo.UniqueId;
                 txtLastName.Text = "(Temporary identifier)";
             }
             btnAccount.Visibility = Windows.UI.Xaml.Visibility.Visible;
@@ -199,7 +199,7 @@ namespace TodoListClient
                     // If the To Do list service returns access denied, clear the token cache and have the user sign-in again.
                     MessageDialog dialog = new MessageDialog("Sorry, you don't have access to the To Do Service. You might need to sign up.");
                     await dialog.ShowAsync();
-                    App.AuthenticationContext.TokenCacheStore.Clear();
+                    App.AuthenticationContext.TokenCache.Clear();
                     this.Frame.Navigate(typeof(MainPage));
                 }
                 else
@@ -268,7 +268,7 @@ namespace TodoListClient
             dialog.Commands.Add(new UICommand(("Yes"), (command) => 
             {
                 // delete the current token
-                App.AuthenticationContext.TokenCacheStore.Clear();
+                App.AuthenticationContext.TokenCache.Clear();
                 // hide the account icon
                 btnAccount.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                 // re-bind AuthenticationContext to the common, tenant-less endpoint
