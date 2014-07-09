@@ -29,13 +29,15 @@ namespace TodoListServiceMT
         // The default validation logic enforces that the incoming Issuer value corresponds to the one associated to the target authority,
         // but in this case every organization will use a different value.
         // To accommodate the situation, the code below turns off the default Issuer validation logic.
-        // The actual check takes place in the MTAuthorizeAttribute filter.
+        // The actual check takes place in the MTAuthorizeAttribute filter. However note that WindowsAzureActiveDirectoryBearerAuthenticationOptions
+        // still needs tenant information during the initialization. For this purpose, provide the tenant against which this service is registered.
         public void ConfigureAuth(IAppBuilder app)
         {
             app.UseWindowsAzureActiveDirectoryBearerAuthentication(
                 new WindowsAzureActiveDirectoryBearerAuthenticationOptions
                 {
                     Audience = ConfigurationManager.AppSettings["ida:Audience"],
+                    // Tenant against which this service is registered
                     Tenant = ConfigurationManager.AppSettings["ida:Tenant"],
                     TokenValidationParameters = new System.IdentityModel.Tokens.TokenValidationParameters() { ValidateIssuer = false }
                 });
