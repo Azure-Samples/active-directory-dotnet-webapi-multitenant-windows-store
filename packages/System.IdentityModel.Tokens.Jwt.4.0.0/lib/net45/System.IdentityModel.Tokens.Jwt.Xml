@@ -764,6 +764,12 @@
             </summary>
             <remarks>This value may be null.</remarks>
         </member>
+        <member name="P:System.IdentityModel.Tokens.JwtHeader.Typ">
+            <summary>
+            Gets the mime type (Typ) of the token.
+            </summary>
+            <remarks>If the mime type is not found, null is returned.</remarks>
+        </member>
         <member name="P:System.IdentityModel.Tokens.JwtHeader.SigningKeyIdentifier">
             <summary>
             Gets a <see cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifier"/> that contains a <see cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifierClause"/> for each key found.
