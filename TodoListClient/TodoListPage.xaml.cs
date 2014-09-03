@@ -79,7 +79,7 @@ namespace TodoListClient
         private async void GetTodoList()
         {
             // get a token for the API. Note that this will often come from the cache
-            AuthenticationResult result = await App.AuthenticationContext.AcquireTokenAsync(App.ResourceID, App.ClientID);
+            AuthenticationResult result = await App.AuthenticationContext.AcquireTokenAsync(App.ResourceID, App.ClientID, App.ReturnUri);
 
             if (result.Status != AuthenticationStatus.Success)
             {
@@ -150,7 +150,7 @@ namespace TodoListClient
         {
             // Get a token for the API. Note that this will almost always come from the cache
             // given that a POST will always follow a get of all the todos, whihc will have already acquired the token if necessary
-            AuthenticationResult result = await App.AuthenticationContext.AcquireTokenAsync(App.ResourceID, App.ClientID);
+            AuthenticationResult result = await App.AuthenticationContext.AcquireTokenAsync(App.ResourceID, App.ClientID, App.ReturnUri);
 
             if (result.Status != AuthenticationStatus.Success)
             {
