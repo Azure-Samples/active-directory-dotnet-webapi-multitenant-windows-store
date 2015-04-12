@@ -59,7 +59,7 @@ namespace TodoListClient
         public static Uri ReturnUri = WebAuthenticationBroker.GetCurrentApplicationCallbackUri();
 
         // Properties used for communicating with the Windows Azure AD tenant of choice
-        public const string CommonAuthority = "https://login.windows.net/common";
+        public const string CommonAuthority = "https://login.microsoftonline.com/common";
         public static AuthenticationContext AuthenticationContext { get; set; }
 
           
