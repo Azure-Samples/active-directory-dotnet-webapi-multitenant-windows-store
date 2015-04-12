@@ -50,25 +50,6 @@ There are two projects in this sample.  Each needs to be separately registered i
 10. While still in the Azure portal, click the Configure tab of your application.
 11. Find the Client ID value and copy it aside, you will need this later when configuring your application.
 12. Find "the application is multi-tenant" switch and flip it to yes. Hit the Save button from the command bar.
-12. Using the Manage Manifest button in the drawer, download the manifest file for the application.
-13. Add a permission to the application by replacing the appPermissions section with the block of JSON below.  You will need to create a new GUID and replace the example permissionId GUID.
-14. Using the Manage Manifest button, upload the updated manifest file.  Save the configuration of the app.
-
-```JSON
-"oauth2Permissions": [
-{
-	"adminConsentDescription": "Allow full access to the To Do List service on behalf of the signed-in user",
-     	"adminConsentDisplayName": "Have full access to the To Do List service",
-     	"id": "b69ee3c9-c40d-4f2a-ac80-961cd1534e40",
-     	"isEnabled": true,
-     	"origin": "Application",
-     	"type": "User",
-     	"userConsentDescription": "Allow full access to the To Do service on your behalf",
-     	"userConsentDisplayName": "Have full access to the To Do service",
-     	"value": "user_impersonation"
-}
-],
-```
 
 #### Find the TodoListClient app's redirect URI
 
@@ -104,7 +85,7 @@ ms-app://s-1-15-2-2123189467-1366327299-2057240504-936110431-2588729968-14545362
 8. Enter the Redirect URI value that you obtained during the previous step.  Click finish.
 9. Click the Configure tab of the application.
 10. Find the Client ID value and copy it aside, you will need this later when configuring your application.
-11. In "Permissions to Other Applications", select the TodoListService, and request the delegated permission "Have full access to the To Do List service".  Save the configuration.
+11. In "Permissions to Other Applications", click "Add Application."  Select "Other" in the "Show" dropdown, and click the upper check mark.  Locate & click on the TodoListService, and click the bottom check mark to add the application.  Select "Access TodoListServiceMT" from the "Delegated Permissions" dropdown, and save the configuration.
 
 ### Step 4: Add the client application to the known clients list of the API 
 
