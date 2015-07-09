@@ -9,7 +9,7 @@ This sample demonstrates a Windows Store application calling a multi-tenant web 
 The web API project demonstrates how to structure your services for being accessed by users coming from multiple Azure AD tenants.
 The Windows Store application shows how to handle in-up sign up for a new service and sign in from any Windows Azure tenant.     
 
-For more information about how the protocols work in this scenario and other scenarios, see [Authentication Scenarios for Azure AD](http://go.microsoft.com/fwlink/?LinkId=394414).
+For more information about how the protocols work in this scenario and other scenarios, see [Authentication Scenarios for Azure AD](https://azure.microsoft.com/documentation/articles/active-directory-authentication-scenarios/).
 
 ## How To Run This Sample
 
