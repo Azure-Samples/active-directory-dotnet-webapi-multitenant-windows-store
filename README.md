@@ -89,14 +89,19 @@ ms-app://s-1-15-2-2123189467-1366327299-2057240504-936110431-2588729968-14545362
 
 ### Step 4: Add the client application to the known clients list of the API 
 
-For the client application to be able to call the web API from a tenant other than the one where you developed the app, you need to explicitly bind the client app entry in AAD with the entry for the web API. You can do so by adding the client ID of the client to the manifest of the web API. Here there's how.
+For the client application to be able to call the web API from a tenant other than the one where you developed the app, you need to explicitly bind the client app registration in Azure AD with the registration for the web API. You can do so by adding the "Client ID" of the client app, to the manifest of the web API. Here's how:
 
-1. Retrieve the web API manifest file, repeating task 12 from step 3, "Register the TodoListServiceMT web API"
-2. In the manifest, locate the knownClientApplications property and add to it the client ID you saved in task 10 of step 3, "Register the TodoListClient app". Your code should look like the following:
-    `"knownClientApplications": [
-    "94da0930-763f-45c7-8d26-04d5938baab2"
-      ] `
-3. Save back the manifest as described in task 14 of step 3, "Register the TodoListServiceMT web API"
+1. Retrieve the application manifest file for the TodoListServiceMT web API you registered in step 3 by
+    2. returning to the TodoListServiceMT application page in the Azure portal
+    3. click the "Manage Manifest" option at the bottom of the page, and select "Download Manifest"
+    4. save the manifest and open it for editing
+
+2. In the manifest, locate the `knownClientApplications` array property, and add the Client ID you saved in task 10 of step 3 ("Register the TodoListClient app") as an element. Your code should look like the following after you're done:
+    `"knownClientApplications": ["94da0930-763f-45c7-8d26-04d5938baab2"]`
+3. Save the TodoListServiceMT manifest back to your Azure AD tenant by
+    4. returning to the TodoListServiceMT application page in the Azure portal
+    5. click the "Manage Manifest" option at the bottom of the page, and select "Upload Manifest"
+    6. browse to the text file you updated in step 2 and upload it
 
 ### Step 5:  Configure the sample to use your Azure AD tenant
 
