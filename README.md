@@ -1,15 +1,4 @@
----
-services:
-platforms:
-author: azure
----
-
-NativeClient-WebAPI-MultiTenant-WindowsStore
-=========================
-
-
-
-
+# NativeClient-WebAPI-MultiTenant-WindowsStore
 
 This sample demonstrates a Windows Store application calling a multi-tenant web API that is secured using Azure AD.  The Windows Store application uses the Active Directory Authentication Library (ADAL) to obtain a JWT access token through the OAuth 2.0 protocol.  The access token is sent to the web API to authenticate the user.
 The web API project demonstrates how to structure your services for being accessed by users coming from multiple Azure AD tenants.
