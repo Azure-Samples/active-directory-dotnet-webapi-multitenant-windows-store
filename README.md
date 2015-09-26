@@ -1,3 +1,9 @@
+---
+services: active-directory
+platforms: dotnet
+author: dstrockis
+---
+
 # Building a multi-tenant web API secured by Azure AD
 
 This sample demonstrates a Windows Store application calling a multi-tenant web API that is secured using Azure AD.  The Windows Store application uses the Active Directory Authentication Library (ADAL) to obtain a JWT access token through the OAuth 2.0 protocol.  The access token is sent to the web API to authenticate the user.
@@ -188,4 +194,5 @@ Coming soon.
 ## How To Recreate This Sample
 
 Coming soon.
+
 
