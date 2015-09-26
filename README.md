@@ -27,7 +27,7 @@ Every Azure subscription has an associated Azure Active Directory tenant.  If yo
 
 From your shell or command line:
 
-`git clone https://github.com/AzureADSamples/NativeClient-WebAPI-MultiTenant-WindowsStore.git`
+`git clone https://github.com/Azure-Samples/active-directory-dotnet-webapi-multitenant-windows-store.git`
 
 ### Step 2:  Create a user account in your Azure Active Directory tenant
 
