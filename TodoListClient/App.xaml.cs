@@ -1,24 +1,9 @@
-﻿//----------------------------------------------------------------------------------------------
-//    Copyright 2014 Microsoft Corporation
-//
-//    Licensed under the Apache License, Version 2.0 (the "License");
-//    you may not use this file except in compliance with the License.
-//    You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-//    Unless required by applicable law or agreed to in writing, software
-//    distributed under the License is distributed on an "AS IS" BASIS,
-//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//    See the License for the specific language governing permissions and
-//    limitations under the License.
-//----------------------------------------------------------------------------------------------
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -32,14 +17,17 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-
-
 namespace TodoListClient
 {
-
+    /// <summary>
+    /// Provides application-specific behavior to supplement the default Application class.
+    /// </summary>
     sealed partial class App : Application
     {
-       
+        /// <summary>
+        /// Initializes the singleton application object.  This is the first line of authored code
+        /// executed, and as such is the logical equivalent of main() or WinMain().
+        /// </summary>
         public App()
         {
             this.InitializeComponent();
@@ -77,12 +65,12 @@ namespace TodoListClient
 
             Frame rootFrame = Window.Current.Content as Frame;
 
+            // Do not repeat app initialization when the Window already has content,
+            // just ensure that the window is active
             if (rootFrame == null)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
-                // Set the default language
-                rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
@@ -110,15 +98,12 @@ namespace TodoListClient
                     // navigate directly to the main app page
                     rootFrame.Navigate(typeof(TodoListPage), e.Arguments);
                 }
-                else 
+                else
                 {
                     // no previous tokens. Navigate to the welcome page
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
-                }                
+                }
             }
-
-            
-
             // Ensure the current window is active
             Window.Current.Activate();
         }

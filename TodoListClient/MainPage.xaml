@@ -16,14 +16,8 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
-                
+
             </Grid.ColumnDefinitions>
-            <Button Visibility="Collapsed" x:Name="backButton" Margin="39,59,39,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
-                        Style="{StaticResource NavigationBackButtonNormalStyle}"
-                        VerticalAlignment="Top"
-                        AutomationProperties.Name="Back"
-                        AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button"/>
             <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
@@ -39,7 +33,7 @@
                 <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
             <TextBlock x:Name="introductionText"  Style="{StaticResource SubheaderTextBlockStyle}" LineHeight="35" Grid.Row="0" Grid.Column="1">
-                This sample demonstrates how to write a native client application that can be run from any Azure AD tenant and invokes a multitenant Web API. 
+                This sample demonstrates how to write a native client application that can be run from any Azure AD tenant and invokes a multitenant Web API.
             </TextBlock>
             <StackPanel Grid.Row="1" Grid.Column="1"  Orientation="Horizontal" >
                 <Button Name="btnSignUp" Click="btnSignUp_Click" FontSize="40" Width="200">Sign Up</Button>
@@ -52,7 +46,7 @@
                 <TextBlock Style="{StaticResource SubheaderTextBlockStyle}" Margin="20" VerticalAlignment="Center" >
                 Choose "Sign In" if you already signed up and you want to access the Web API.
                 </TextBlock>
-            </StackPanel>            
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>
