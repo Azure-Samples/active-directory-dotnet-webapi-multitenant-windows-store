@@ -17,8 +17,8 @@ For more information about how the protocols work in this scenario and other sce
 ## How To Run This Sample
 
 To run this sample you will need:
-- Visual Studio 2013
-- Windows 8.1 or higher
+- Visual Studio 2015
+- Windows 10
 - An Internet connection
 - An Azure subscription (a free trial is sufficient)
 - A Microsoft account
@@ -110,7 +110,7 @@ For the client application to be able to call the web API from a tenant other th
 
 #### Configure the TodoListServiceMT project
 
-1. Open the solution in Visual Studio 2013.
+1. Open the solution in Visual Studio 2015.
 2. Open the `web.config` file.
 3. Find the app key `ida:Tenant` and replace the value with your AAD tenant name.
 4. Find the app key `ida:Audience` and replace the value with the App ID URI you registered earlier, for example `https://<your_tenant_name>/TodoListServiceMT`.
