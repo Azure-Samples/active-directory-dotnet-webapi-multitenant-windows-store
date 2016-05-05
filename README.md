@@ -12,6 +12,8 @@ The Windows Store application shows how to handle in-up sign up for a new servic
 
 For more information about how the protocols work in this scenario and other scenarios, see [Authentication Scenarios for Azure AD](https://azure.microsoft.com/documentation/articles/active-directory-authentication-scenarios/).
 
+> Looking for previous versions of this code sample? Check out the tags on the [releases](../../releases) GitHub page.
+
 ## How To Run This Sample
 
 To run this sample you will need:
