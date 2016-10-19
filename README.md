@@ -71,12 +71,12 @@ ms-app://s-1-15-2-2123189467-1366327299-2057240504-936110431-2588729968-14545362
 
 1. Sign in to the [Azure portal](https://portal.azure.com).
 2. On the top bar, click on your account and under the **Directory** list, choose the Active Directory tenant where you wish to register your application.
-2. Click on **More Services** in the left hand nav, and choose **Azure Active Directory**.
-3. Click on **App registrations** and choose **Add**.
-4. Enter a friendly name for the application, for example 'TodoListClient-WindowsStore' and select 'Native' as the Application Type. Enter the Redirect URI value that you obtained during the previous step. Click on **Create** to create the application.
-5. While still in the Azure portal, choose your application, click on **Settings** and choose **Properties**.
-6. Find the Application ID value and copy it to the clipboard.
-7. Configure Permissions for your application - in the Settings menu, choose the 'Required permissions' section, click on **Add**, then **Select an API**, and type 'TodoListServiceMT' in the textbox. Then, click on  **Select Permissions** and select 'Access TodoListServiceMT'.
+3. Click on **More Services** in the left hand nav, and choose **Azure Active Directory**.
+4. Click on **App registrations** and choose **Add**.
+5. Enter a friendly name for the application, for example 'TodoListClient-WindowsStore' and select 'Native' as the Application Type. Enter the Redirect URI value that you obtained during the previous step. Click on **Create** to create the application.
+6. While still in the Azure portal, choose your application, click on **Settings** and choose **Properties**.
+7. Find the Application ID value and copy it to the clipboard.
+8. Configure Permissions for your application - in the Settings menu, choose the 'Required permissions' section, click on **Add**, then **Select an API**, and type 'TodoListServiceMT' in the textbox. Then, click on  **Select Permissions** and select 'Access TodoListServiceMT'.
 
 ### Step 3: Add the client application to the known clients list of the API 
 
@@ -87,7 +87,7 @@ For the client application to be able to call the web API from a tenant other th
     3. click the "Manage Manifest" option at the bottom of the page, and select "Download Manifest"
     4. save the manifest and open it for editing
 
-2. In the manifest, locate the `knownClientApplications` array property, and add the Client ID you saved in task 10 of step 3 ("Register the TodoListClient app") as an element. Your code should look like the following after you're done:
+2. In the manifest, locate the `knownClientApplications` array property, and add the Client ID you saved in task 7 of "Register the TodoListClient app" of step 2 as an element. Your code should look like the following after you're done:
     `"knownClientApplications": ["94da0930-763f-45c7-8d26-04d5938baab2"]`
 3. Save the TodoListServiceMT manifest back to your Azure AD tenant by
     4. returning to the TodoListServiceMT application page in the Azure portal
