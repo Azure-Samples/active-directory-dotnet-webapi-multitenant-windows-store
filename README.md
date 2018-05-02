@@ -77,7 +77,17 @@ ms-app://s-1-15-2-2123189467-1366327299-2057240504-936110431-2588729968-14545362
 4. Enter a friendly name for the application, for example 'TodoListClient-WindowsStore' and select 'Native' as the Application Type. Enter the Redirect URI value that you obtained during the previous step. Click on **Create** to create the application.
 5. While still in the Azure portal, choose your application, click on **Settings** and choose **Properties**.
 6. Find the Application ID value and copy it to the clipboard.
-7. Configure Permissions for your application - in the Settings menu, choose the 'Required permissions' section, click on **Add**, then **Select an API**, and type 'TodoListServiceMT' in the textbox. Then, click on  **Select Permissions** and select 'Access TodoListServiceMT'.
+7. Configure Permissions for your client application to access the service
+	1. In the Settings menu, choose the 'Required permissions' section
+	2. Click on **Add**, then click on **Select an API**
+	3. Type 'TodoListServiceMT' in the textbox.
+	4. Click on **Select Permissions**
+	5. Select 'Access TodoListServiceMT'
+8. Enable your native app for mulitenancy
+	1. From the app details, click the 'Manifest' option
+	2. Click **Edit**
+	3. Change the value of `availableToOtherTenants` to `true`.
+	4. Click **Save**
 
 ### Step 3: Add the client application to the known clients list of the API 
 
