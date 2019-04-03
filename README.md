@@ -6,6 +6,12 @@ author: jmprieur
 
 # Building a multi-tenant web API secured by Azure AD
 
+> There's a newer version of this sample! Check it out: https://github.com/azure-samples/ms-identity-dotnet-native-uwp
+>
+> This newer sample takes advantage of the Microsoft identity platform (formerly Azure AD v2.0).
+>
+> While still in public preview, every component is supported in production environments.
+
 This sample demonstrates a Windows Store application calling a multi-tenant web API that is secured using Azure AD.  The Windows Store application uses the Active Directory Authentication Library (ADAL) to obtain a JWT access token through the OAuth 2.0 protocol.  The access token is sent to the web API to authenticate the user.
 The web API project demonstrates how to structure your services for being accessed by users coming from multiple Azure AD tenants.
 The Windows Store application shows how to handle in-up sign up for a new service and sign in from any Azure tenant.     
