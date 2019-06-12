@@ -59,6 +59,7 @@ namespace TodoListServiceMT.Controllers
         /// Verifies that the JWT used to call the API:
         /// 1) has user claims
         /// 2) has a scope claim of value "user_impersonation".
+        /// If that's not the case an HTTP 401 is returned.
         /// </summary>
         private static void VerifyScope()
         {
